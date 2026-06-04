@@ -1,7 +1,15 @@
-# Spring Boot : Application PetClinic
+# Laboratorio N° 12 - Pruebas de Integración
 
-## Features  
+## Comandos de ejecución
 
-### 1.  Unit Test  --> Tag v1.0.0
-### 2.  Integration Test  --> Tag v2.0.0
-mvn clean test -Dspring.profiles.active=h2
+**Ejercicio 1 (Vet):** `mvn test -Dtest=VetControllerTest`
+
+**Ejercicio 2 (Owner):** `mvn test -Dtest=OwnerControllerTest`
+
+**Ejercicio 3 (Specialty):** `mvn test -Dtest=VetControllerTest#testVetHasSpecialties`
+
+**Ejercicio 4 (Visit):** `mvn test -Dtest=VisitControllerTest`
+
+**Todos los ejercicios:** `mvn test`
+
+**Resultado esperado:** `Tests run: 9, Failures: 0, Errors: 0, Skipped: 0 | BUILD SUCCESS`
