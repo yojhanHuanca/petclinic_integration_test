@@ -27,6 +27,12 @@ public class Visit {
 	@Column(name = "description")
 	private String description;
 
+	@Column(name = "vet_id")
+	private Integer vetId;
+
+	@Column(name = "cost")
+	private Double cost;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pet_id")
 	//@ToString.Exclude

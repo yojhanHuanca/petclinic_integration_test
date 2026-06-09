@@ -1,7 +1,6 @@
 package com.tecsup.petclinic.webs;
 
 import com.tecsup.petclinic.dtos.VetDTO;
-import com.tecsup.petclinic.entities.Vet;
 import com.tecsup.petclinic.services.VetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,9 +29,9 @@ public class VetController {
      * @return list of vets
      */
     @GetMapping
-    public ResponseEntity<List<Vet>> findAll() {
+    public ResponseEntity<List<VetDTO>> findAll() {
         log.info("Getting all vets");
-        List<Vet> vets = vetService.findAll();
+        List<VetDTO> vets = vetService.findAll();
         return ResponseEntity.ok(vets);
     }
 

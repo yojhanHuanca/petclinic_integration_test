@@ -42,7 +42,7 @@ logging :
 
   # Output to a temp_folder/file
   file :
-    name : ${user.home}/temp/application.log
+    name : target/logs/application.log
 
   pattern :
   # Logging pattern for the console : IT IS OK

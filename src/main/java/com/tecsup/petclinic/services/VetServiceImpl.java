@@ -4,6 +4,7 @@ import com.tecsup.petclinic.dtos.VetDTO;
 import com.tecsup.petclinic.entities.Vet;
 import com.tecsup.petclinic.repositories.VetRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,9 +29,12 @@ public class VetServiceImpl implements VetService {
      * @return list of vets
      */
     @Override
-    public List<Vet> findAll() {
+    public List<VetDTO> findAll() {
         log.info("Finding all vets");
-        return vetRepository.findAll();
+        return vetRepository.findAll(Sort.by(Sort.Direction.ASC, "id"))
+                .stream()
+                .map(this::mapToDto)
+                .toList();
     }
 
     /**

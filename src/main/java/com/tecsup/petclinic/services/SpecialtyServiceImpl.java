@@ -1,6 +1,7 @@
 package com.tecsup.petclinic.services;
 
 import java.util.List;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
 	@Transactional(readOnly = true)
 	public List<Specialty> findAll() {
 		log.info("Finding all specialties");
-		return specialtyRepository.findAll();
+		return specialtyRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
 	}
 
 	@Override

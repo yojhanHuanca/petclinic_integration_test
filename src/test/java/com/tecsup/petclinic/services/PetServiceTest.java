@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import com.tecsup.petclinic.entities.Pet;
 import com.tecsup.petclinic.exceptions.PetNotFoundException;
@@ -18,6 +19,7 @@ import com.tecsup.petclinic.exceptions.PetNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
+@Sql({"/schema.sql", "/data.sql"})
 @Slf4j
 public class PetServiceTest {
 

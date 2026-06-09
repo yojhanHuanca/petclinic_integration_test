@@ -51,7 +51,11 @@ public class VisitController {
 
     @PutMapping("/{id}")
     public ResponseEntity<VisitDTO> update(@PathVariable Long id, @RequestBody VisitDTO visitDTO) {
-        return ResponseEntity.ok(visitService.update(id, visitDTO));
+        try {
+            return ResponseEntity.ok(visitService.update(id, visitDTO));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")

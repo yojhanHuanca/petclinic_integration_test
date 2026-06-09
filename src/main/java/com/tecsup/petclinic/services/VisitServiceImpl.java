@@ -6,6 +6,7 @@ import com.tecsup.petclinic.entities.Pet;
 import com.tecsup.petclinic.repositories.VisitRepository;
 import com.tecsup.petclinic.repositories.PetRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +25,7 @@ public class VisitServiceImpl implements VisitService {
     @Override
     @Transactional(readOnly = true)
     public List<VisitDTO> findAll() {
-        return visitRepository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
+        return visitRepository.findAll(Sort.by(Sort.Direction.ASC, "id")).stream().map(this::mapToDto).collect(Collectors.toList());
     }
 
     @Override
@@ -39,6 +40,8 @@ public class VisitServiceImpl implements VisitService {
         Visit visit = new Visit();
         visit.setDescription(visitDTO.getDescription());
         visit.setVisitDate(visitDTO.getVisitDate());
+        visit.setVetId(visitDTO.getVetId());
+        visit.setCost(visitDTO.getCost());
         Pet pet = petRepository.findById(visitDTO.getPetId())
                 .orElseThrow(() -> new IllegalArgumentException("Pet not found"));
         visit.setPet(pet);
@@ -51,6 +54,8 @@ public class VisitServiceImpl implements VisitService {
                 .orElseThrow(() -> new IllegalArgumentException("Visit not found"));
         visit.setDescription(visitDTO.getDescription());
         visit.setVisitDate(visitDTO.getVisitDate());
+        visit.setVetId(visitDTO.getVetId());
+        visit.setCost(visitDTO.getCost());
         return mapToDto(visitRepository.save(visit));
     }
 
@@ -70,7 +75,13 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public Double calculateTotalCostByPet(Integer petId) { return 0.0; }
+    public Double calculateTotalCostByPet(Integer petId) {
+        return visitRepository.findByPetId(petId).stream()
+                .map(Visit::getCost)
+                .filter(cost -> cost != null)
+                .mapToDouble(Double::doubleValue)
+                .sum();
+    }
 
     @Override
     public List<VisitDTO> findByDateBetween(LocalDate from, LocalDate to) {
@@ -87,6 +98,7 @@ public class VisitServiceImpl implements VisitService {
 
     private VisitDTO mapToDto(Visit visit) {
         return VisitDTO.builder().id(visit.getId()).description(visit.getDescription())
-                .visitDate(visit.getVisitDate()).petId(visit.getPet().getId()).build();
+                .visitDate(visit.getVisitDate()).petId(visit.getPet().getId())
+                .vetId(visit.getVetId()).cost(visit.getCost()).build();
     }
 }

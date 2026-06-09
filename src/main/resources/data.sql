@@ -92,6 +92,13 @@ INSERT INTO visits (id, pet_id, vet_id, visit_date, description, cost) VALUES
 (5, 1, 1, '2024-01-15', 'general checkup', 65.00),
 (6, 3, 4, '2024-02-20', 'dental cleaning', 150.00);
 
+ALTER TABLE vets ALTER COLUMN id RESTART WITH 7;
+ALTER TABLE specialties ALTER COLUMN id RESTART WITH 4;
+ALTER TABLE types ALTER COLUMN id RESTART WITH 9;
+ALTER TABLE owners ALTER COLUMN id RESTART WITH 11;
+ALTER TABLE pets ALTER COLUMN id RESTART WITH 14;
+ALTER TABLE visits ALTER COLUMN id RESTART WITH 7;
+
 -- ===============================================
 -- END OF DATA INSERTION
 -- ===============================================
