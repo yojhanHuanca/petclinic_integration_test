@@ -16,5 +16,6 @@ public class VetDTO {
     private String firstName;
 
     private String lastName;
+    private String lastnime;
 
 }

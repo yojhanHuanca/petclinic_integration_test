@@ -13,3 +13,5 @@
 **Todos los ejercicios:** `mvn test`
 
 **Resultado esperado ejecutando todos:** `Tests run: 49, Failures: 0, Errors: 0, Skipped: 0 | BUILD SUCCESS`
+
+**Prueba final del laboratorio Jenkins
